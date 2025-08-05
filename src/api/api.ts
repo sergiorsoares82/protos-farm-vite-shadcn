@@ -1,4 +1,3 @@
-// api.ts
 import axios from "axios";
 
 let accessToken: string | null = localStorage.getItem("accessToken");
@@ -12,9 +11,13 @@ export const setAccessToken = (token: string | null) => {
   }
 };
 
+// Fallback: if env is missing, use the current origin
+const API_BASE_URL =
+  import.meta.env.VITE_API_BASE_URL || window.location.origin;
+
 const api = axios.create({
-  baseURL: "https://localhost:3000",
-  withCredentials: true, // so refresh token cookies are sent
+  baseURL: API_BASE_URL,
+  withCredentials: true,
 });
 
 // Add Authorization header
@@ -35,9 +38,8 @@ api.interceptors.response.use(
       originalRequest._retry = true;
 
       try {
-        // Get new token
         const { data } = await axios.post(
-          "https://localhost:3000/auth/refresh",
+          `${API_BASE_URL}/auth/refresh`,
           {},
           { withCredentials: true }
         );
@@ -45,11 +47,11 @@ api.interceptors.response.use(
         setAccessToken(data.accessToken);
         originalRequest.headers.Authorization = `Bearer ${data.accessToken}`;
 
-        return api(originalRequest); // retry request
+        return api(originalRequest);
       } catch (err) {
-        console.log(err);
+        console.error(err);
         setAccessToken(null);
-        window.location.href = "/login"; // logout
+        window.location.href = "/login";
       }
     }
 

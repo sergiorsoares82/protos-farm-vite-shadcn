@@ -31,7 +31,7 @@ export const UsersPage = () => {
   return (
     <div style={{ maxWidth: 800, margin: "20px auto" }}>
       <h2>Users</h2>
-      <h3>{isCreating ? "Add User" : "Edit User"}</h3>
+
       <button
         onClick={() => {
           setIsCreating(true);
@@ -96,7 +96,7 @@ export const UsersPage = () => {
             }}
             onClick={(e) => e.stopPropagation()}
           >
-            <h3>{selectedUser.user_id ? "Edit User" : "Add User"}</h3>
+            <h3>{isCreating ? "Add User" : "Edit User"}</h3>
             <input
               placeholder="Username"
               defaultValue={selectedUser.username || ""}
