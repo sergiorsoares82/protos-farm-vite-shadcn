@@ -10,22 +10,22 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import { DataTable } from "@/components/data-table/data-table";
-import { getUsersTableColumns } from "./components/users-table-columns";
+// import { DataTable } from "@/components/data-table/data-table";
+// import { getUsersTableColumns } from "./components/users-table-columns";
 import type { UserType } from "./components/users-type";
 import type { User } from "@/types/user";
 import {
   useUsers,
   useCreateUser,
   useUpdateUser,
-  useDeleteUser,
+  // useDeleteUser,
 } from "@/api/users/useUsers";
 
 export const UsersPage = () => {
   const { data: users, isLoading } = useUsers();
   const createMutation = useCreateUser();
   const updateMutation = useUpdateUser();
-  const deleteMutation = useDeleteUser();
+  // const deleteMutation = useDeleteUser();
 
   const [open, setOpen] = useState(false);
   const [editingUser, setEditingUser] = useState<UserType | null>(null);
@@ -34,15 +34,15 @@ export const UsersPage = () => {
     defaultValues: { username: "", email: "", password: "" },
   });
 
-  const handleEdit = (user: UserType) => {
-    setEditingUser(user);
-    reset({ username: user.username, email: user.email, password: "" });
-    setOpen(true);
-  };
+  // const handleEdit = (user: UserType) => {
+  //   setEditingUser(user);
+  //   reset({ username: user.username, email: user.email, password: "" });
+  //   setOpen(true);
+  // };
 
-  const handleDelete = (id: string) => {
-    if (confirm("Delete this user?")) deleteMutation.mutate(id);
-  };
+  // const handleDelete = (id: string) => {
+  //   if (confirm("Delete this user?")) deleteMutation.mutate(id);
+  // };
 
   const onSubmit = (data: Partial<User>) => {
     if (editingUser) {
@@ -64,7 +64,7 @@ export const UsersPage = () => {
   if (isLoading) return <p className="p-4">Loading...</p>;
   if (!users) return <p className="p-4">No users found.</p>;
 
-  const columns = getUsersTableColumns(handleEdit, handleDelete);
+  // const columns = getUsersTableColumns(handleEdit, handleDelete);
 
   return (
     <div className="p-6 space-y-4">
