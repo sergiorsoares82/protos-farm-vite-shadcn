@@ -4,6 +4,7 @@ import { LoginPage } from "./pages/LoginPage";
 import { HomePage } from "./pages/HomePage";
 import { PrivateRoute } from "./components/PrivateRoute";
 import { UsersPage } from "./pages/users/UsersPage";
+import TestPage from "./pages/TestPage";
 
 export const App = () => (
   <BrowserRouter>
@@ -13,6 +14,7 @@ export const App = () => (
       <Route element={<PrivateRoute />}>
         <Route path="/" element={<HomePage />} />
         <Route path="/users" element={<UsersPage />} />
+        <Route path="/test" element={<TestPage />} />
       </Route>
     </Routes>
   </BrowserRouter>
