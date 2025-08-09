@@ -81,7 +81,7 @@ export const UsersPage = () => {
         </Button>
       </div>
 
-      <DataTable columns={columns} data={users.data} />
+      {/* <DataTable columns={columns} data={users.data} /> */}
 
       <Dialog open={open} onOpenChange={setOpen} aria-label="User Form">
         <DialogContent>
